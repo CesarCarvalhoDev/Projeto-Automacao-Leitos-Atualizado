@@ -6,5 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    //
+    protected $fillable = [
+        'description',
+        'status',
+        'patient_id',
+        'sector_id',
+        'user_id'
+    ];
+
+    public function patient(){
+        return $this->belongsTo(Patient::class);
+    }
+
+    public function sector(){
+        return $this->belongsTo(Sector::class);
+    }
+
+    publiC function user(){
+        return $this->belongsTo(User::class);
+    }
 }
