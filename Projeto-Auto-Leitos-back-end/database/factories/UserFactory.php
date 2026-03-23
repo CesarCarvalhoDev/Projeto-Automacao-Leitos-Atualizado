@@ -26,7 +26,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => fake()->unique()->bothify('user###??@gmail.com'),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
@@ -35,7 +35,8 @@ class UserFactory extends Factory
                 'ASSISTANT',
                 'CLEANER'
             ]),
-            'sector_id' => Sector::factory(),
+            'active' => fake()->boolean(50),
+            'sector_id' => Sector::inRandomOrder()->first()->id,
         ];
     }
 

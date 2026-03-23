@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('role');
             $table->boolean('active');
             $table->rememberToken();
+            $table->foreignId('sector_id')->constrained();
             $table->timestamps();
         });
 

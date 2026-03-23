@@ -28,8 +28,9 @@ class OrderFactory extends Factory
                 'COMPLETED',
                 'CANCELLED'
             ]),
+            'date_time' => $this->faker->dateTime(),
             'patient_id' => Patient::factory(),
-            'sector_id' => Sector::factory(),
+            'sector_id' => Sector::inRandomOrder()->first()->id,
             'user_id' => $this->faker->boolean(70) ? User::factory() : null,
         ];
     }

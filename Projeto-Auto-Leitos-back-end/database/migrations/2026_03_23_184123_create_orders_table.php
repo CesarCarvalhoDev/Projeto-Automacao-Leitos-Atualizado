@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('description');
             $table->dateTime('date_time');
-            $table->foreignId('pacient_id')->constrained();
+            $table->foreignId('patient_id')->constrained();
             $table->foreignId('sector_id')->constrained();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->string('status');
