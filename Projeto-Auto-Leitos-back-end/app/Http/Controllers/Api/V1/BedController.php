@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BedResource;
+use App\Http\Resources\BedWithPatientResource;
+use App\Models\Bed;
+use App\Models\Patient;
+use App\Services\Bed\AllocatePatientToBedService;
+use App\Services\Bed\GetAllBedsService;
+use App\Services\BedService;
 use Illuminate\Http\Request;
 
 class BedController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(GetAllBedsService $service)
     {
-        //
+        return $service->execute();
     }
 
     /**
@@ -34,9 +38,9 @@ class BedController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Bed $bed)
     {
-        //
+        return new BedResource($bed);
     }
 
     /**
@@ -61,5 +65,14 @@ class BedController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function allocatePatientToBed(Request $request, Bed $bed, AllocatePatientToBedService $service)
+    {
+        $patient = Patient::findOrFail($request->patient_id);
+
+        $allocatedBed = $service->execute($bed, $patient);
+
+        return new BedWithPatientResource($allocatedBed);
     }
 }
