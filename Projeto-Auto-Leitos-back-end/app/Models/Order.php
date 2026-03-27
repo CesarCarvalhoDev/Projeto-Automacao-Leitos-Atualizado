@@ -17,6 +17,12 @@ class Order extends Model
         'user_id'
     ];
 
+    protected function casts(){
+        return [
+            'date_time' => 'datetime'
+        ];
+    }
+
     public function patient(){
         return $this->belongsTo(Patient::class);
     }

@@ -18,6 +18,6 @@ class Bed extends Model
     protected $hidden = [];
 
     public function patient(){
-        return $this->belongsTo(Patient::class);
+        return $this->hasOne(Patient::class);
     }
 }

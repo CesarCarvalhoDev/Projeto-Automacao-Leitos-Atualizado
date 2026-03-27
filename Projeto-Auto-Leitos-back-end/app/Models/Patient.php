@@ -14,23 +14,34 @@ class Patient extends Model
         'cpf'
     ];
 
-    protected $hidden = [
+    protected $hidden = [];
 
-    ];
-
-    protected function casts() : array
+    protected function casts(): array
     {
-        return [
+        return [];
+    }
 
-        ];
+    protected static function booted()
+    {
+        static::creating(function ($patient) {
+            if ($patient->bed_id) {
+                $bed = \App\Models\Bed::find($patient->bed_id);
+
+                if ($bed->status === 'MAINTENANCE') {
+                    throw new \Exception('Leito em manutenção');
+                }
+            }
+        });
     }
 
     //Relacionamentos
-    public function bed(){
-        return $this->hasOne(Bed::class);
+    public function bed()
+    {
+        return $this->belongsTo(Bed::class);
     }
 
-    public function orders(){
+    public function orders()
+    {
         return $this->hasMany(Order::class);
     }
 }
