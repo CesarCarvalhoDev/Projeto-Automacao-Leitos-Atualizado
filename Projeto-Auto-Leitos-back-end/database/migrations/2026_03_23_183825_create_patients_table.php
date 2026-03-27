@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('cpf');
+            $table->foreignId('bed_id')->nullable()->unique()->constrained();
             $table->timestamps();
         });
     }
