@@ -35,7 +35,7 @@ class UserFactory extends Factory
                 'ASSISTANT',
                 'CLEANER'
             ]),
-            'active' => fake()->boolean(50),
+            'active' => fake()->boolean(90),
             'sector_id' => Sector::inRandomOrder()->first()->id,
         ];
     }

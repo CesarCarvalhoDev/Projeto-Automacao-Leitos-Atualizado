@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Bed;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class PatientFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'cpf' => $this->faker->unique()->numerify('###########'),
+            'bed_id' => null
         ];
     }
 }

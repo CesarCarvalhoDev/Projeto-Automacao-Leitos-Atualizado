@@ -9,6 +9,27 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class BedFactory extends Factory
 {
+    public function available(): static
+    {
+        return $this->state(fn() => [
+            'status' => 'AVAILABLE',
+        ]);
+    }
+
+    public function occupied(): static
+    {
+        return $this->state(fn() => [
+            'status' => 'OCCUPIED',
+        ]);
+    }
+
+    public function maintenance(): static
+    {
+        return $this->state(fn() => [
+            'status' => 'MAINTENANCE',
+        ]);
+    }
+
     /**
      * Define the model's default state.
      *
@@ -18,11 +39,7 @@ class BedFactory extends Factory
     {
         return [
             'number' => $this->faker->unique()->numberBetween(1, 100),
-            'status' => $this->faker->randomElement([
-                'AVAILABLE',
-                'OCCUPIED',
-                'MAINTENANCE'
-            ]),
+            'status' => 'AVAILABLE',
         ];
     }
 }
